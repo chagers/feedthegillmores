@@ -1,17 +1,21 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <RecipeList msg="Welcome to Your Vue.js App"/>
+    <p v-for="(recipe, index) in recipes" :key="index">{{ recipe.fields.title }}</p>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import RecipeList from './components/RecipeList.vue';
 
 export default {
   name: 'app',
   components: {
-    HelloWorld,
+    RecipeList,
+  },
+  data() {
+    const recipes = this.$root.recipes.items;
+    return { recipes };
   },
 };
 </script>

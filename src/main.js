@@ -4,6 +4,25 @@ import './registerServiceWorker';
 
 Vue.config.productionTip = false;
 
-new Vue({
-  render: h => h(App),
-}).$mount('#app');
+const config = require('./config.js');
+const contentful = require('contentful');
+
+const client = contentful.createClient({
+  space: config.default.mySpaceId,
+  accessToken: config.default.myAccessToken,
+});
+
+let recipes = {};
+
+client.getEntries({})
+  .then((response) => {
+    recipes = response;
+    new Vue({
+      render: h => h(App),
+      data: {
+        recipes,
+      },
+    }).$mount('#app');
+  })
+  // eslint-disable-next-line
+  .catch(console.error);
