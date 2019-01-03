@@ -61,4 +61,4 @@ typings/
 .next
 
 # contentful config
-src/config.js
+src/config.ts
