@@ -32,8 +32,8 @@ client.getEntries({})
     new Vue({
       router,
       render: h => h(App),
-      data: {
-        recipes: response,
+      data() {
+        return { recipes: response };
       },
     }).$mount('#app');
   })
