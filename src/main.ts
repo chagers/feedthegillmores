@@ -14,19 +14,28 @@ const client = contentful.createClient({
   accessToken: config.myAccessToken,
 });
 
-let recipes = {};
+interface Recipe {
+  title: '',
+  yields: '',
+  time: '',
+  linkToImage: '',
+  dietFriendly: false,
+  ingredientsLong: '', // markdown?
+  preparation: '', // markdown?
+  source: '',
+  image: '',
+  ingredients: '',
+}
 
 client.getEntries({})
-  .then((response: {}) => {
-    recipes = response;
+  .then((response: { items: []; }) => {
     new Vue({
       router,
       render: h => h(App),
       data: {
-        recipes,
+        recipes: response,
       },
     }).$mount('#app');
-    console.log(recipes);
   })
   // eslint-disable-next-line
   .catch(console.error);
