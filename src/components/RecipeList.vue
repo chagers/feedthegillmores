@@ -1,23 +1,23 @@
 <template>
-  <div>
+  <div v-if="recipes.length > 0">
     <p>RecipeList</p>
-    <Recipe v-for="(recipe, index) in recipes" :key="index" :title="recipe.fields.title" />
+    <RecipeDetail v-for="(recipe, index) in recipes" :key="index" :recipe="recipe.fields" />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
-import Recipe from '@/components/Recipe.vue';
+import RecipeDetail from '@/views/RecipeDetail.vue';
+import { Recipe } from '../models/recipe';
 
 @Component({
   components: {
-    Recipe,
+    RecipeDetail,
   },
 })
 
 export default class RecipeList extends Vue {
-  @Prop()
-    recipes!: any
+  @Prop() recipes!: Recipe[];
 }
 </script>
 

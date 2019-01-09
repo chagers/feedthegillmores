@@ -14,19 +14,6 @@ const client = contentful.createClient({
   accessToken: config.myAccessToken,
 });
 
-interface Recipe {
-  title: '',
-  yields: '',
-  time: '',
-  linkToImage: '',
-  dietFriendly: false,
-  ingredientsLong: '', // markdown?
-  preparation: '', // markdown?
-  source: '',
-  image: '',
-  ingredients: '',
-}
-
 client.getEntries({})
   .then((response: { items: []; }) => {
     new Vue({
