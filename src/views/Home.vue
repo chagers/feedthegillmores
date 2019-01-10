@@ -8,7 +8,6 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import RecipeList from '@/components/RecipeList.vue';
-import { Recipe } from '../models/recipe';
 
 @Component({
   components: {
@@ -18,14 +17,14 @@ import { Recipe } from '../models/recipe';
 export default class Home extends Vue {
   data: any = this.$root.$data;
 
-  recipes: Recipe[] = [];
+  recipes: any = {};
 
   created() {
-    this.setRecipes();
+    this.getRecipes();
   }
 
-  setRecipes() {
-    this.recipes = this.data.recipes.items;
+  getRecipes() {
+    this.recipes = this.data.recipes;
     return this.recipes;
   }
 }

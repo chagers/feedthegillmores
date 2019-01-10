@@ -21,9 +21,9 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue'),
     },
     {
-      path: '/recipe-detail/[:id]',
+      path: '/recipe-detail/:id',
       name: 'recipe-detail',
       component: RecipeDetail,
-    }
+    },
   ],
 });

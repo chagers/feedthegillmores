@@ -1,7 +1,6 @@
 <template>
   <div class="recipe">
-    <h1>{{ title }}</h1>
-    <p>{{ yields }}</p>
+    <h1>{{ recipe.title }}</h1>
   </div>
 </template>
 
@@ -9,26 +8,23 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { Recipe } from '../models/recipe';
 
+
 @Component
 export default class RecipeDetail extends Vue {
-  @Prop()
-    recipe!: Recipe;
+  data: any = this.$root.$data;
 
-    title: string = this.recipe.title;
+  recipe = {};
 
-    yields: string = this.recipe.yields;
+  created() {
+    this.getRecipe(this.$route.params.id);
+  }
 
-    time: string = this.recipe.time;
-
-    linkToImage: string = this.recipe.linkToImage;
-
-    dietFriendly: boolean = this.recipe.dietFriendly;
-
-    ingredientsLong: string = this.recipe.ingredientsLong; // markdown?
-
-    preparation: string = this.recipe.preparation; // markdown?
-
-    source: string = this.recipe.source;
+  getRecipe(id: string) {
+    const recipes = this.data.recipes.items;
+    const recipeObject = recipes.find((r: any) => r.sys.id === id);
+    this.recipe = recipeObject.fields;
+    return this.recipe;
+  }
 }
 </script>
 

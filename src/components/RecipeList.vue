@@ -1,7 +1,14 @@
 <template>
-  <div v-if="recipes.length > 0">
+  <div>
     <p>RecipeList</p>
-    <RecipeDetail v-for="(recipe, index) in recipes" :key="index" :recipe="recipe.fields" />
+    <router-link
+      v-for="(recipe, index) in recipes.items"
+      :key="index"
+      :recipe="recipe.fields"
+      :to="`/recipe-detail/${recipe.sys.id}`"
+      class="recipe-link">
+      {{ recipe.fields.title }}
+    </router-link>
   </div>
 </template>
 
@@ -17,11 +24,15 @@ import { Recipe } from '../models/recipe';
 })
 
 export default class RecipeList extends Vue {
-  @Prop() recipes!: Recipe[];
+  @Prop() recipes!: any;
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+  .recipe-link {
+    display: block;
+  }
 
 </style>
